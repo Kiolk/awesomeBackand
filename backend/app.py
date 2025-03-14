@@ -19,7 +19,7 @@ async def generate_word_periodically():
     while True:
         last_generated_word = generate_random_word()
         logging.info(f"Generated new word: {last_generated_word}")
-        await asyncio.sleep(10)
+        await asyncio.sleep(1)
     
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -38,7 +38,6 @@ async def get_last_generated_word():
     if last_generated_word:
         return {"last_generated_word": last_generated_word}
     else:
-        asyncio.create_task(generate_word_periodically())
         return {"message": "No word generated yet"}
     
 @app.get("/")
