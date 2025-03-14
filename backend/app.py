@@ -38,6 +38,7 @@ async def get_last_generated_word():
     if last_generated_word:
         return {"last_generated_word": last_generated_word}
     else:
+        asyncio.create_task(generate_word_periodically())
         return {"message": "No word generated yet"}
     
 @app.get("/")
