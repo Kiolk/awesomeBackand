@@ -37,6 +37,8 @@ app = FastAPI(lifespan=lifespan)
     
 @app.get("/last_word")
 async def get_last_generated_word():
+    global last_generated_word
+    last_generated_word = generate_random_word()
     if last_generated_word:
         return {"last_generated_word": last_generated_word}
     else:
