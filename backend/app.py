@@ -23,7 +23,9 @@ async def generate_word_periodically():
     
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    global last_generated_word
     try:
+        last_generated_word = generate_random_word()
         asyncio.create_task(generate_word_periodically())
         logging.info("Periodic word generation started")
         yield
